@@ -1,14 +1,7 @@
 package com.example.demo.Models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.persistence.*;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,10 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class Usuario {
     @Id
     @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="userName")
+    @Column(name="user_name")
     private String userName;
-    @Column(name="passwordHash")
+    @Column(name="password_hash")
     private String passwordHash;
+
+    public Usuario(String userName, String passwordHash) {
+        this.userName = userName;
+        this.passwordHash = passwordHash;
+    }
 
 }

@@ -23,9 +23,22 @@ public class usuarioDaoImp implements usuarioDao{
       String query="SELECT u FROM Usuario u";
         return entityManager.createQuery(query).getResultList();
     }
-    public Usuario getUsuario(int id) {
-       String query="select * from usuario where id="+id;
-       return (Usuario) entityManager.createQuery(query).getSingleResult();
 
+    @Override
+    public void insertUsuario(Usuario usuario) {
+        entityManager.merge(usuario);
+    }
+
+    @Override
+    public void deleteUsuario(int id) {
+        Usuario usuario = entityManager.find(Usuario.class, id);
+        entityManager.remove(usuario);
+    }
+
+
+
+    public Usuario getUsuario(int id) {
+       String query="SELECT u FROM Usuario u WHERE id="+id;
+       return (Usuario) entityManager.createQuery(query).getSingleResult();
   }
 }
